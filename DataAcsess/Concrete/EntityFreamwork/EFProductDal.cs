@@ -1,5 +1,7 @@
-﻿using DataAcsess.abstrac;
+﻿using Core.DataAcsess.EntityFreamwork;
+using DataAcsess.abstrac;
 using Entities.Concrete;
+using Entities.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,56 +12,11 @@ using System.Threading.Tasks;
 
 namespace DataAcsess.Concrete.EntityFreamwork
 {
-    public class EFProductDal : IProductDal
+    public class EFProductDal : EfEntityRepositoryBase<Product, Northwind>, IProductDal
     {
-        public void Add(Product entity)
+        public List<ProductDetailDto> GetProductDetails()
         {
-            using (Northwind context=new Northwind())
-            {
-                var addedentity = context.Entry(entity);  
-                addedentity.State=EntityState.Added;
-                context.SaveChanges();
-            
-            }
-        }
-
-        public void Delete(Product entity)
-        {
-            using (Northwind context = new Northwind())
-            {
-                var deletedentity = context.Entry(entity);
-                deletedentity.State = EntityState.Deleted;
-                context.SaveChanges();
-
-            }
-        }
-
-        public Product Get(Expression<Func<Product, bool>> filter)
-        {
-            using (Northwind context=new Northwind())
-            {
-                return context.Set<Product>().SingleOrDefault(filter);
-            }
-        }
-
-        public List<Product> GetAll(Expression<Func<Product, bool>> filter )
-        {
-            using (Northwind context=new Northwind())
-            {
-                return filter == null ? context.Set<Product>().ToList():
-                    context.Set<Product>().Where(filter).ToList();
-            }
-        }
-
-        public void Update(Product entity)
-        {
-            using (Northwind context = new Northwind())
-            {
-                var uptadedentity = context.Entry(entity);
-                uptadedentity.State = EntityState.Modified;
-                context.SaveChanges();
-
-            }
+            throw new NotImplementedException();
         }
     }
 }

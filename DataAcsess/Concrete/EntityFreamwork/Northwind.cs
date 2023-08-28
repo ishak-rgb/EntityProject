@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace DataAcsess.Concrete.EntityFreamwork
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"server=LAPTOP-R3KJC1J9\SQLEXPRESS02;Database=Northwind;Trusted_Connection=true ");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS02;Database=card;Trusted_Connection=true;TrustServerCertificate=True");
         }
-        public DbSet<Product> Products { get  ; set ; }
-
+        public DbSet<Product> products { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
     }
 }
